@@ -1,0 +1,65 @@
+<nav class="navbar navbar-inverse myColor navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand active">omar.lo.ch</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a class="clikable" routerLink="/taches">Tâches</a></li>
+        <li><a class="clikable" routerLink="/contacts">Contacts</a></li>
+        <li><a class="clikable" routerLink="/galeries">Galeries</a></li>
+        <li *ngIf="authService.isAdmin()"><a class="clikable" routerLink="/users">Utilisateurs</a></li>
+        <li *ngIf="authService.isAdmin()"><a class="clikable" routerLink="/roles">Rôles</a></li>
+      </ul>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a class="clikable"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a class="clikable" (click)="onLogout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a>{{authService.getUserConnected()}}
+          <span class="glyphicon glyphicon-user"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container-fluid spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading myCenter">Liste des photos</div>
+    <div class="panel-body">
+      <form #f="ngForm" (ngSubmit)="onChercher()">
+        <div class="form-group">
+          <input class="input" name="motCle" [(ngModel)]="motCle"
+            type="text" placeholder="Chercher les photos" required>
+          <button [disabled]="!f.valid" class="btn btn-primary btnRcherche" type="submit">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </div>
+      </form>
+      <div class="row">
+        <div *ngFor= "let photo of listePhotos?.hits" class="col-md-3">
+          <div class="panel panel-primary cadre">
+            <div class="panel-heading">
+              <img src="{{photo.userImageURL}}" class="img-circle" width="50" height="50">
+              <span>{{photo.user}}</span>
+            </div>
+            <div class="panel-body clikable" >
+              <div>
+                  <p><strong>Tags</strong>: {{getTags(photo.tags)}}</p>
+              </div>
+              <img src="{{photo.previewURL}}">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <ul class="nav nav-pills">
+          <li *ngFor="let p of totalPages; let i = index"
+            [ngClass]="{'active': pageCourrente == i + 1}">
+            <a (click)="goToPage(i)" class="clikable">{{i}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

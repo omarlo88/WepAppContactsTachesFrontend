@@ -1,0 +1,61 @@
+<nav class="navbar navbar-inverse myColor navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand active">omar.lo.ch</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a class="clikable" routerLink="/taches">Tâches</a></li>
+        <li><a class="clikable" routerLink="/contacts">Contacts</a></li>
+        <li><a class="clikable" routerLink="/galeries">Galeries</a></li>
+        <li *ngIf="authService.isAdmin()"><a class="clikable" routerLink="/users">Utilisateurs</a></li>
+        <li *ngIf="authService.isAdmin()"><a class="clikable" routerLink="/roles">Rôles</a></li>
+      </ul>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a class="clikable"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a class="clikable" (click)="onLogout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a>{{authService.getUserConnected()}}
+          <span class="glyphicon glyphicon-user"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid spacer">
+  <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-primary">
+          <div class="panel-heading myCenter">Liste des utilisateurs</div>
+          <div class="panel-body">
+            <table class="table table-striped">
+              <tr>
+                <th>ID</th><th>Username</th><th></th><th></th>
+              </tr>
+              <tr *ngFor="let u of users" class="clikable changeColor">
+              <!--  <td (click)="onDetail(u.id)"> -->
+                <td routerLink="/detail-user/{{u.id}}">
+                    <span class="badge">{{u.id}}</span>
+                </td>
+                <td routerLink="/detail-user/{{u.id}}">
+                  {{u.username}}
+                </td>
+             <!--   <td (click)="onEdit(u.id)"> -->
+                <td routerLink="/edit-user/{{u.id}}">
+                  <a> <span class="glyphicon glyphicon-pencil"></span> Editer</a>
+                </td>
+                <td (click)="onRemove(u.id)">
+                  <a> <span class="glyphicon glyphicon-trash"></span> Supprimer</a>
+                </td>
+
+              </tr>
+            </table>
+            <!--
+            <ul class="nav">
+              <li *ngFor="let u of users">
+                <span class="badge">{{u.id}}</span> {{u.username}}
+              </li>
+            </ul> -->
+          </div>
+        </div>
+  </div>
+</div>

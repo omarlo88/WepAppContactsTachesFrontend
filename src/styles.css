@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+.spacer{
+  margin-top: 60px;
+}
+.myCenter{
+  text-align: center;
+}
+.clikable{
+  cursor: pointer;
+}
+
+.myColor{
+  background-color: darkgreen;
+}
+
+.input{
+  width: 250px;
+  height: 30px;
+}
+
+.myMargin{
+  margin-top: 25px;
+}
+

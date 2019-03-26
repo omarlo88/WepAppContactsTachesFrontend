@@ -1,0 +1,76 @@
+<div class="container myMargin">
+    <div class="alert alert-danger" *ngIf="mode == 1">
+        <strong>Le nom d'utilisateur ou le mot de passe des invalide!!</strong>
+      </div>
+  <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-primary">
+          <div class="panel-heading myCenter">Nouvel utilisateur</div>
+          <div class="panel-body">
+              <form #f="ngForm" (ngSubmit)="onEnregistrer(f.value)">
+                  <div class="form-group">
+                      <label class="control-label"></label>
+                      <label class="control-label"></label>
+                      <input class="form-control" name="nom" type="text"
+                        placeholder="Saisissez votre nom" ngModel #nom="ngModel" required>
+
+                        <div *ngIf="nom.invalid" class="alert alert-danger">
+                          <span>Le nom est obligatoire!!</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"></label>
+                        <label class="control-label"></label>
+                        <input class="form-control" name="prenom" type="text"
+                          placeholder="Saisissez votre prénom" ngModel #prenom="ngModel" required>
+
+                          <div *ngIf="prenom.invalid" class="alert alert-danger">
+                              <span>Le prénom est obligatoire!!</span>
+                            </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label"></label>
+                          <label class="control-label"></label>
+                          <input class="form-control" name="email" type="email"
+                            placeholder="Saisissez votre email" ngModel #email="ngModel" email required>
+
+                            <div *ngIf="email.invalid" class="alert alert-danger">
+                                <span>L'email est obligatoire!!</span>
+                              </div>
+                          </div>
+                  <div class="form-group">
+                    <label class="control-label"></label>
+                    <label class="control-label"></label>
+                    <input class="form-control" name="username" type="text"
+                      placeholder="Saisissez votre username" #username="ngModel" ngModel required>
+
+                      <div *ngIf="username.invalid" class="alert alert-danger">
+                          <span>Le nom d'utilisateur est obligatoire!!</span>
+                        </div>
+                    </div>
+                  <div class="form-group">
+                      <label class="control-label"></label>
+                    <input  class="form-control" name="password" type="password"
+                      placeholder="Saisissez votre password" #password="ngModel" ngModel required>
+
+                      <div *ngIf="password.invalid" class="alert alert-danger">
+                          <span>Le password est obligatoire!!</span>
+                        </div>
+                    </div>
+                  <div class="form-group">
+                      <label class="control-label"></label>
+                    <input  class="form-control" name="repassword" type="password"
+                      placeholder="Resaisissez votre password" #repassword="ngModel" ngModel required>
+
+                      <div *ngIf="repassword.invalid" class="alert alert-danger">
+                          <span>Il faut confirmer votre password!!</span>
+                        </div>
+                      <label class="control-label"></label>
+                    <label class="control-label"></label>
+                  </div>
+                  <button [disabled]="!f.valid" class="btn btn-success" type="submit">S'enregistrer</button>
+                  <button routerLink="/login"  class="btn btn-danger" type="submit">Annuler</button>
+                </form>
+          </div>
+        </div>
+  </div>
+</div>

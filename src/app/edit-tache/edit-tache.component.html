@@ -1,0 +1,66 @@
+<nav class="navbar navbar-inverse myColor navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand active">omar.lo.ch</a>
+      </div>
+      <div>
+        <ul class="nav navbar-nav">
+          <li><a class="clikable" routerLink="/taches">Tâches</a></li>
+          <li><a class="clikable" routerLink="/contacts">Contacts</a></li>
+          <li><a class="clikable" routerLink="/galeries">Galeries</a></li>
+          <li *ngIf="authService.isAdmin()"><a class="clikable" routerLink="/users">Utilisateurs</a></li>
+          <li *ngIf="authService.isAdmin()"><a class="clikable" routerLink="/roles">Rôles</a></li>
+        </ul>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a class="clikable"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a class="clikable" (click)="onLogout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        <li><a>{{authService.getUserConnected()}}
+            <span class="glyphicon glyphicon-user"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+<div class="container-fluid spacer">
+  <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-primary">
+          <div class="panel-heading">Nouvelle Tâche</div>
+          <div class="panel-body">
+            <form #f="ngForm" (ngSubmit)="onUpdate()">
+              <div class="form-group">
+                <label class="control-label">Nom de la tâche</label>
+                <input name="nom" [(ngModel)]="tache.nom" class="form-control"
+                  type="text" required minlength="2" #nom="ngModel">
+              </div>
+              <div class="form-group">
+                  <label class="control-label">Statut:</label>
+                  <div class="form-control">
+                      <label class="control-label">
+                          <input type="radio" name="statut" [value]=true
+                          [(ngModel)]="tache.statut"> Ouvert
+                        </label>
+                        <label class="control-label">
+                            <input type="radio" name="statut" [value]=false
+                            [(ngModel)]="tache.statut"> Fermé
+                        </label>
+                  </div>
+
+                </div>
+              <div class="form-group">
+                  <label class="control-label">Description de la tâche</label>
+                    <textarea class="form-control" name="description" [(ngModel)]="tache.description"
+                      cols="30" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Date d'expiration</label>
+                    <input class="form-control" type="date" #dateExpiration="ngModel"
+                        [(ngModel)]="tache.dateExpiration" name="dateExpiration" required>
+                </div>
+                <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+  </div>
+</div>
+  </div>
+</div>
+
